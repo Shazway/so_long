@@ -6,14 +6,14 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:04:49 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/24 15:40:00 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:16:37 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include "../mlx/mlx.h"
-# include "libft.h"
+# include "../includes/libft.h"
 # include "get_next_line.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -49,6 +49,8 @@ typedef struct s_parsing
 	t_point	player;
 	t_point	exit;
 	t_point collect;
+	int		map_width;
+	int		map_height;
 }	t_parsing;
 
 typedef	struct s_data
@@ -59,15 +61,16 @@ typedef	struct s_data
 	int			width;
 	void		*img;
 	char		*addr;
+	char		**map;
 	t_color		*draw;
 	t_img		*text;
 	t_parsing	*pars;
 }	t_data;
 
 //---------Parsing----------//
-int		parsing(t_list *parse, char **argv);
-int		map_parsing(t_list *parse);
-int		map_dimensions(t_list *parse);
+int		parsing(t_data *data, t_list *parse, char **argv);
+int		map_parsing(t_list *parse, t_data *data);
+int		map_dimensions(t_list *parse, t_data *data);
 int		center_lines(char *line);
 int		border_lines(char *border_line);
 //---------Allocation-------//
@@ -75,5 +78,6 @@ int		ft_free(t_data *data);
 int		ft_allocate(t_data *data);
 //---------Data init--------//
 void	init_textures_data(t_data *data);
+void	assign_text(t_data *data, int nb, char *path);
 
 #endif

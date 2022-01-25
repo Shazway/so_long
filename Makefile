@@ -6,7 +6,7 @@
 #    By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 23:27:53 by tmoragli          #+#    #+#              #
-#    Updated: 2022/01/24 15:37:56 by tmoragli         ###   ########.fr        #
+#    Updated: 2022/01/25 16:54:29 by tmoragli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS	=	srcs/so_long.c														\
 			srcs/parsing.c														\
 			srcs/get_next_line_utils.c											\
 			srcs/memory_allocs.c												\
-			srcs/textures_init.c													\
+			srcs/textures_init.c												\
+			srcs/ft_free_tab.c													\
 			
 LIBFTSRCS = ft_memccpy.c														\
 			ft_memchr.c															\
