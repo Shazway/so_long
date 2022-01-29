@@ -6,7 +6,7 @@
 #    By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 23:27:53 by tmoragli          #+#    #+#              #
-#    Updated: 2022/01/25 16:54:29 by tmoragli         ###   ########.fr        #
+#    Updated: 2022/01/29 23:43:47 by tmoragli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,115 +18,55 @@ SRCS	=	srcs/so_long.c														\
 			srcs/get_next_line_utils.c											\
 			srcs/memory_allocs.c												\
 			srcs/textures_init.c												\
-			srcs/ft_free_tab.c													\
-			
-LIBFTSRCS = ft_memccpy.c														\
-			ft_memchr.c															\
-			ft_memcmp.c															\
-			ft_memcpy.c															\
-			ft_memmove.c														\
-			ft_memset.c															\
-			ft_putchar_fd.c														\
-			ft_putendl_fd.c														\
-			ft_putnbr_fd.c														\
-			ft_putstr_fd.c														\
-			ft_split.c															\
-			ft_strchr.c															\
-			ft_strdup.c															\
-			ft_strjoin.c														\
-			ft_strlcat.c														\
-			ft_strlcpy.c														\
-			ft_strlen.c															\
-			ft_strmapi.c														\
-			ft_strncmp.c														\
-			ft_strnstr.c														\
-			ft_strrchr.c														\
-			ft_strtrim.c														\
-			ft_substr.c															\
-			ft_tolower.c														\
-			ft_toupper.c														\
-			ft_atoi.c															\
-			ft_bzero.c															\
-			ft_calloc.c															\
-			ft_isalnum.c														\
-			ft_isalpha.c														\
-			ft_isascii.c														\
-			ft_isdigit.c														\
-			ft_isprint.c														\
-			ft_itoa.c															\
-			ft_putnbrbase_fd.c													\
-			ft_putnbru_fd.c														\
-			ft_putnbrubase_fd.c													\
-			ft_numlen.c															\
-			get_next_line.c														\
-			get_next_line_utils.c												\
-			ft_strjoin_free.c													\
-			ft_strcmp.c															\
-			ft_lst_add_back.c													\
-			ft_lstadd_front.c													\
-			ft_lstclear.c														\
-			ft_lstdelone.c														\
-			ft_lstiter.c														\
-			ft_lstlast.c														\
-			ft_lstmap.c															\
-			ft_lstnew.c															\
-			ft_lstsize.c														\
 
-MLXHEADER = mlx/mlx.h
+INCLUDES	=	-Iincludes								\
+				-Imlx
 
-LOCLIBREP = /usr/local/lib/
+OBJS		=	$(SRCS:.c=.o)
 
-LOCLIBMLX	= ${LOCLIBREP}libmlx.a
+CC			=	clang
+RM			=	@rm -f
 
-LIBMLX_DIR = ./mlx/
-
-LIBMLX	= ${LIBMLX_DIR}libmlx.a
-
-LIBFTOBJS =${LIBFTSRCS:.c=.o}
-
-OBJS	= ${SRCS:.c=.o}
-
-CC		= gcc
-
-LIBFT	= ./libft/libft.a
-
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
-
-LIBFT_DIR = ./libft
-
-LIBS	= -L${LIBMLX_DIR} -lmlx -lXext -lX11 -lm -L${LIBFT_DIR} -lft
-
-RM		= rm -f
-
-${NAME}:	${LIBFT} ${MLXHEADER} ${LIBMLX} ${OBJS}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
-	mv srcs/*.o objs
+LD_FLAGS	=	-Lmlx -lbsd -lmlx -lXext -lX11 -lm -g -fsanitize=leak libft/libft.a
+FLAGS		=	-Wall -Werror -Wextra $(INCLUDES) -g -D BONUS=0
+LIBFT		=	libft/libft.a
 
 .c.o:
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+				$(CC) -c $< -o $(<:.c=.o) $(FLAGS)
 
-${LIBFT}:
-	@make -sC ./libft -j
+$(NAME):		start_message $(LIBFT) $(OBJS) start_link
+				$(CC) $(OBJS) $(FLAGS) -o $(NAME) $(LD_FLAGS)
+				@echo "\033[1;31mso_long\033[0m is ready to use!"
 
-${LOCLIBMLX}: ${LIBMLX}
-	@echo allow creation of the mlx librairy
-	@sudo cp ${LIBMLX} ${LOCLIBREP}
+$(LIBFT):
+				make -C libft -f Makefile
 
-${LIBMLX}:
-	@make -sC ./mlx
+all:			$(NAME)
 
-${LOCMLXHEADER}:
-	@echo allow creation of the mlx.h header
-	@sudo mv ./mlx/mlx.h /usr/local/include/
+bonus:			add_flag re
 
-all:	${NAME}
+add_flag:
+			$(eval FLAGS := -D BONUS=1)
 
 clean:
-	 ${RM} objs/*.o ${BONUSOBJS}
+#					@clear
+					@make -s -C libft -f Makefile clean
+					@echo "\033[0;33mCleaning \033[1;31m$(NAME)\033[0;33m's objects\033[0m"
+					$(RM) $(OBJS)
 
-fclean:	clean
-	${RM} ${NAME}
+fclean:				clean
+					@make -s -C libft -f Makefile fclean
+					@echo "\033[0;33mRemoving \033[1;31m$(NAME)\033[0;33m.\033[0m"
+					$(RM) $(NAME)
 
-re:		fclean all
+start_message:
+#				@clear
+				@echo "\033[0;31mMaking \033[1;31mso_long"
+				@echo "\033[1;32mCompiling objects\033[0;32m"
 
-.PHONY:		all clean fclean re
+start_link:
+				@echo "\033[1;32mLinking all objects\033[0;32m"
+
+re:				fclean all
+
+.PHONY:			all clean fclean re

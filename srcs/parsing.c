@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:20:16 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/27 21:30:04 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/29 23:29:33 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		border_lines(char *border_line)
 	return (1);
 }
 
-int		center_lines(char *line)
+int		center_lines(char *line, int y, t_data *data)
 {
 	int i;
 
@@ -36,6 +36,16 @@ int		center_lines(char *line)
 		if (line[i] != 'P' && line[i] != '0' && line[i] != 'E' 
 			&& line[i] != 'C' && line[i] != '1')
 			return (1);
+		if (line[i] == 'C')
+			data->coins++;
+		if (line[i] == 'P' && data->player.x != -1)
+			return (1);
+		if (line[i] == 'P')
+			data->player = point(i, y);
+		if (line[i] == 'E' && data->exit.x != -1)
+			return (1);
+		if (line[i] == 'E')
+			data->exit = point(i, y);
 		i++;
 	}
 	return (0);
@@ -43,13 +53,11 @@ int		center_lines(char *line)
 
 int		map_dimensions(t_list *parse, t_data *data)
 {
-	int	width;
-
-	width = ft_strlen((const char *)parse->content);
-	data->width = data->text[1].width * width;
+	data->map_size.x = ft_strlen((const char *)parse->content);
+	data->width = data->s * data->map_size.x;
 	while (parse)
 	{
-		if (width != ft_strlen((const char *)parse->content))
+		if (data->map_size.x != ft_strlen((const char *)parse->content))
 			return (1);
 		if (!(parse->next))
 			return (0);
@@ -61,33 +69,24 @@ int		map_dimensions(t_list *parse, t_data *data)
 int		map_parsing(t_list *parse, t_data *data)
 {
 	int pos;
-	int size;
 
-	size = ft_lstsize(parse);
-	data->map = malloc(sizeof(char *) * (size + 1));
-	data->height = data->text[1].height * size;
+	data->map_size.y = ft_lstsize(parse);
+	data->map = malloc(sizeof(char *) * (data->map_size.y + 1));
+	data->height = data->s * data->map_size.y;
 	pos = 0;
 	while (parse)
 	{
-		if (pos == 0 || pos == size)
-			if (border_lines((char *)parse->content))
+		data->map[pos] = NULL;
+		if ((pos == 0 || pos == data->map_size.y - 1)
+			&& border_lines((char *)parse->content))
 				return (1);
-		if (center_lines((char *)parse->content))
+		if (center_lines((char *)parse->content, pos, data))
 			return (1);
-		data->map[pos] = parse->content;
-		if (!(parse->next))
-		{	
-			if (border_lines((char *)parse->content))
-				return (1);
-			else
-			{	
-				data->map[pos + 1] = NULL;
-				return (0);
-			}
-		}
+		data->map[pos] = ft_strdup(parse->content);
 		pos++;
 		parse = parse->next;
 	}
+	data->map[pos] = NULL;
 	return(0);
 }
 
@@ -106,5 +105,8 @@ int		parsing(t_data *data, t_list *parse, char **argv)
 		ft_lstclear(&parse, free);
 		return (1);
 	}
+	ft_lstclear(&parse, free);
+	if (data->player.x == -1 || data->exit.x == -1 || !data->coins)
+		return (1);
 	return(0);
 }

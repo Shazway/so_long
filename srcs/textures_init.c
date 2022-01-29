@@ -12,7 +12,9 @@
 
 #include "../includes/so_long.h"
 
-// This function assigns to the tabulation of structures each textures data accordingly to the titles//
+/*
+** This function assigns to the tabulation of structures each textures data accordingly to the titles
+*/ 
 
 void	assign_text(t_data *data, int nb, char *path)
 {
@@ -23,9 +25,20 @@ void	assign_text(t_data *data, int nb, char *path)
 	data->text[nb].draw = (t_color *)data->text[nb].addr;
 }
 
+void	init_data(t_data *data)
+{
+	data->player.x = -1;
+	data->player.y = -1;
+	data->exit.x = -1;
+	data->exit.y = -1;
+	data->coins = 0;
+	data->finish = 0;
+	data->moves = 0;
+	data->s = SIZE;
+}
+
 void	init_textures_data(t_data *data)
 {
-	data->mlx = mlx_init();
 	//BACKGROUND TEXTURE//
 	assign_text(data, 0, "Textures/Background.xpm");
 	//WALL TEXTURE//
