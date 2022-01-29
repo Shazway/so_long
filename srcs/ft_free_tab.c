@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 16:08:33 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/25 16:11:44 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:43:24 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ void    ft_free_tab(char **str)
 {
     int i;
 
-    i = -1;
-    while (str && str[++i])
+    i = 0;
+    while (str && str[i])
+    {
         free(str[i]);
+        i++;
+    }
     free(str);
 }

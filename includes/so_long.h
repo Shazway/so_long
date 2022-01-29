@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:04:49 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/25 16:16:37 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:28:39 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int		map_dimensions(t_list *parse, t_data *data);
 int		center_lines(char *line);
 int		border_lines(char *border_line);
 //---------Allocation-------//
-int		ft_free(t_data *data);
+int		ft_free(t_data *data, int bool);
 int		ft_allocate(t_data *data);
 //---------Data init--------//
 void	init_textures_data(t_data *data);

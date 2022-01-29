@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:08:18 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/24 16:04:46 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/29 13:34:47 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	walls(t_data *data, t_img text)
 		y += text.height;
 	}
 }
-void	wall_fill(t_data *data, t_img text)
+void	map_fill(t_data *data, t_img text)
 {
 	int x;
 	int y;
@@ -119,9 +119,11 @@ void	wall_fill(t_data *data, t_img text)
 	{
 		x = 0;
 		while (data->map[y][x])
-		{
+		{	
 			if (data->map[y][x] == '1')
 				draw_texture(data, x * text.width, y * text.height, text);
+			if (data->map[y][x] == 'P')
+				draw_texture(data, x * data->text[1].width - 20, y * data->text[1].height - 20, data->text[2]);
 			x++;
 		}
 		y++;
@@ -139,15 +141,29 @@ void	init_mlx_data(t_data *data, int trash)
 void	first_image(t_data *data)
 {
 	background_fill(data, data->text[0]);
-	wall_fill(data, data->text[1]);
+	map_fill(data, data->text[1]);
 }
 
+int		key_hook(int keycode)
+{
+	printf("Keycode is : %d\n", keycode);
+	if (keycode == 65307)
+	{
+		printf("You pressed escape key\nSession terminated\n");
+		exit(0);
+	}
+	return (0);
+}
+int		exit_window(t_data *data)
+{
+	(void)data;
+	return (EXIT_SUCCESS);
+}
 void	so_long(t_data *data)
 {
 	first_image(data);
-	printf("%d\n", data->text[1].height);
-	printf("%d\n", data->text[1].width);
-	//draw_texture(data, 250, 250);
+	mlx_key_hook(data->win, key_hook, &data);
+	mlx_hook(data->win, 33, 1L << 17, exit_window, &data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_loop(data->mlx);
 }
@@ -166,13 +182,12 @@ int	main(int argc, char **argv)
 	init_textures_data(data);
 	if (parsing(data, parse, argv))
 	{
-		ft_free(data);
+		ft_free(data, 1);
 		write(1, "Map error\n", 11);
 		return (1);
 	}
 	init_mlx_data(data, 0);
-	printf("%d, %d\n", data->height, data->width);
 	so_long(data);
-	ft_free(data);
+	ft_free(data, 0);
 	return (0);
 }
