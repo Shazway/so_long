@@ -6,7 +6,7 @@
 #    By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 23:27:53 by tmoragli          #+#    #+#              #
-#    Updated: 2022/01/30 13:46:46 by tmoragli         ###   ########.fr        #
+#    Updated: 2022/01/30 15:21:52 by tmoragli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ $(NAME):		start_message $(LIBFT) $(MLX) $(OBJS) start_link
 				@echo "\033[1;31mso_long\033[0m is ready to use!"
 
 $(MLX):
-				make -C mlx -f Makefile
+				make -C mlx -f Makefile.mk
 
 $(LIBFT):
 				make -C libft -f Makefile

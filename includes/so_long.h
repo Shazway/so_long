@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:04:49 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 13:30:32 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 14:56:29 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define ERR_DIM "Wrong dimensions for the map"
 # define ERR_NO_MAP "No map given"
 # define ERR_MULTI_MAP "Multiple maps given"
+# define ERR_MALLOC "Malloc failed"
 //#define UP 119	//QWERTY
 //#define RT 97		//QWERTY
 # define DW 115

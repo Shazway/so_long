@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:20:16 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 13:24:35 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 14:56:55 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	map_parsing(t_list *parse, t_data *data)
 
 	data->map_size.y = ft_lstsize(parse);
 	data->map = malloc(sizeof(char *) * (data->map_size.y + 1));
+	if (!data->map)
+		return (ft_error(data, ERR_MALLOC, 0));
 	data->height = data->s * data->map_size.y;
 	pos = 0;
 	while (parse)
