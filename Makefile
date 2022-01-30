@@ -6,7 +6,7 @@
 #    By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 23:27:53 by tmoragli          #+#    #+#              #
-#    Updated: 2022/01/30 15:21:52 by tmoragli         ###   ########.fr        #
+#    Updated: 2022/01/30 15:48:23 by tmoragli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ INCLUDES	=	-Iincludes														\
 				-Imlx
 
 OBJS		=	$(SRCS:.c=.o)
-CC			=	clang
+CC			=	gcc
 RM			=	@rm -f
 
 LD_FLAGS	=	-Lmlx -lbsd -lXext -lX11 -lmlx -lm -g -fsanitize=address libft/libft.a mlx/libmlx.a mlx/libmlx_Linux.a
@@ -42,7 +42,7 @@ $(NAME):		start_message $(LIBFT) $(MLX) $(OBJS) start_link
 				@echo "\033[1;31mso_long\033[0m is ready to use!"
 
 $(MLX):
-				make -C mlx -f Makefile.mk
+				make -C mlx -f Makefile
 
 $(LIBFT):
 				make -C libft -f Makefile
