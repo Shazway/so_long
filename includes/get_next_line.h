@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 01:18:12 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/06 23:23:00 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 05:29:25 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
-
 
 int		get_next_line(int fd, char **line);
 char	*ft_strjoin(const char *s1, const char *s2);

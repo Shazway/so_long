@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/06 01:32:10 by telli             #+#    #+#             */
-/*   Updated: 2022/01/06 21:24:32 by tmoragli         ###   ########.fr       */
+/*   Created: 2022/01/30 04:11:13 by tmoragli          #+#    #+#             */
+/*   Updated: 2022/01/30 04:26:17 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_malloc(void **ptr, int size)
 {
-	int i;
-
-	i = 0;
-	while (s[i] != c && s[i])
-		i++;
-	if (c == s[i])
-		return ((char *)(&s[i]));
-	return (NULL);
+	*ptr = malloc(size);
+	if (!*ptr)
+		return (1);
+	return (0);
 }

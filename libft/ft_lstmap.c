@@ -6,11 +6,11 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/27 15:04:46 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/06 21:24:32 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:19:49 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
@@ -20,7 +20,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	dest = NULL;
 	while (lst)
 	{
-		if (!(temp = ft_lstnew(f(lst->content))))
+		temp = ft_lstnew(f(lst->content));
+		if (!temp)
 		{
 			ft_lstclear(&dest, del);
 			return (NULL);

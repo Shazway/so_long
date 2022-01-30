@@ -6,21 +6,21 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 00:29:28 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/29 21:01:41 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:51:57 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int		ft_free(t_data *data, int bool)
+int	ft_free(t_data *data, int bool)
 {
-	int nb;
+	int	nb;
 
 	free(data->pars);
 	if (bool == 0)
 	{
 		nb = -1;
-		while (++nb < 9)	
+		while (++nb < 9)
 			mlx_destroy_image(data->mlx, data->text[nb].img);
 		mlx_destroy_image(data->mlx, data->img);
 		mlx_destroy_window(data->mlx, data->win);
@@ -33,7 +33,7 @@ int		ft_free(t_data *data, int bool)
 	return (1);
 }
 
-int		ft_allocate(t_data *data)
+int	ft_allocate(t_data *data)
 {
 	data->text = malloc(sizeof(t_img) * 9);
 	data->pars = malloc(sizeof(t_parsing));

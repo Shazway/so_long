@@ -6,15 +6,15 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 13:41:06 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/06 21:24:32 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:15:41 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 int	ft_lstsize(t_list *lst)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!lst)

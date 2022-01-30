@@ -5,22 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 16:08:33 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/27 21:43:24 by tmoragli         ###   ########.fr       */
+/*   Created: 2022/01/30 03:48:22 by tmoragli          #+#    #+#             */
+/*   Updated: 2022/01/30 04:29:30 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
-void    ft_free_tab(char **str)
+void	ft_free_tab(char **str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str && str[i])
-    {
-        free(str[i]);
-        i++;
-    }
-    free(str);
+	i = 0;
+	while (str && str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

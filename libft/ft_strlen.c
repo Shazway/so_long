@@ -6,18 +6,18 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/30 15:37:43 by telli             #+#    #+#             */
-/*   Updated: 2022/01/06 23:23:57 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:30:57 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "libft.h"
 
 int		ft_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	while (str && str[i])
+	while (str[i])
 		i++;
 	return (i);
 }

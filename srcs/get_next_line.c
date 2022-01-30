@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 01:17:31 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/06 21:48:44 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:41:25 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-int		ft_line(int fd, char **stock)
+int	ft_line(int fd, char **stock)
 {
 	char	buffer[999 + 1];
 	char	*temp;
@@ -47,7 +47,7 @@ int		ft_line(int fd, char **stock)
 	return (1);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char		*stock[150];
 	int				ret;
@@ -65,7 +65,7 @@ int		get_next_line(int fd, char **line)
 	{
 		ret = 1;
 		*line = ft_substr(stock[fd], 0,
-		(ft_strchr(stock[fd], '\n') - stock[fd]));
+				(ft_strchr(stock[fd], '\n') - stock[fd]));
 		temp = ft_strdup(ft_strchr(stock[fd], '\n') + 1);
 	}
 	free(stock[fd]);

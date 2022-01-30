@@ -6,15 +6,15 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 01:16:52 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/06 21:48:49 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 04:48:59 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int		ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str && str[i])
@@ -27,7 +27,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 	char	*dest;
 
-	if (!(dest = malloc(sizeof(char) * (ft_strlen(s) + 1))))
+	if (ft_malloc((void **)&(dest), sizeof(char) * (ft_strlen(s) + 1)))
 		return (NULL);
 	i = 0;
 	while (s && s[i])
@@ -49,7 +49,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (NULL);
 	if (start >= (unsigned int)ft_strlen(s))
 		len = 0;
-	if (!(dest = malloc(sizeof(char) * (len + 1))))
+	if (ft_malloc((void **)&(dest), sizeof(char) * (len + 1)))
 		return (NULL);
 	while (i < len)
 	{
@@ -63,8 +63,8 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 
 char	*ft_filldest(const char *s1, char const *s2, char *dest)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (s1 && s1[j])
@@ -91,7 +91,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	i = ft_strlen(s1) + ft_strlen(s2) + 1;
-	if (!(dest = malloc(sizeof(char) * (i))))
+	if (ft_malloc((void **)&(dest), sizeof(char) * i))
 		return (NULL);
 	return (ft_filldest(s1, s2, dest));
 }
