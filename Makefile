@@ -6,7 +6,7 @@
 #    By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 23:27:53 by tmoragli          #+#    #+#              #
-#    Updated: 2022/01/30 15:48:23 by tmoragli         ###   ########.fr        #
+#    Updated: 2022/01/30 17:33:44 by tmoragli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,10 @@ SRCS	=	srcs/so_long.c														\
 			srcs/init.c															\
 			srcs/checks.c														\
 			srcs/draw.c															\
-			srcs/moves.c
+			srcs/moves.c														\
+			srcs/errors.c														\
 
-INCLUDES	=	-Iincludes														\
-				-Imlx
+INCLUDES	=	-Iincludes -Imlx
 
 OBJS		=	$(SRCS:.c=.o)
 CC			=	gcc
@@ -61,12 +61,12 @@ clean:
 					@echo "\033[0;33mCleaning \033[1;31m$(NAME)\033[0;33m's objects\033[0m"
 					$(RM) $(OBJS)
 
-fclean:				clean
-					@make -s -C libft -f Makefile clean
+fclean:
+					@make -s -C libft -f Makefile fclean
 					@make -s -C mlx -f Makefile clean
 					@echo "\033[0;33mRemoving \033[1;31m$(NAME)\033[0;33m.\033[0m"
 					$(RM) $(NAME)
-
+					$(RM) $(OBJS)
 start_message:
 #				@clear
 				@echo "\033[0;31mMaking \033[1;31mso_long"

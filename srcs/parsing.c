@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:20:16 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 14:56:55 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:20:20 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ int	parsing(t_data *data, t_list *parse, char **argv)
 	char	*line;
 
 	fd = open(argv[1], O_RDONLY);
+	data->map = NULL;
+	if (fd == -1)
+		return (ft_error(data, ERR_NO_MAP, 0));
 	while (get_next_line(fd, &line))
 		ft_lstadd_back(&parse, ft_lstnew(line));
 	ft_lstadd_back(&parse, ft_lstnew(line));

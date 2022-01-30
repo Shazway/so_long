@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:08:18 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 14:58:12 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:33:00 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,22 +58,14 @@ void	so_long(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-int	ft_error(t_data *data, char *error, int bool)
-{
-	printf("Error\n%s\n", error);
-	if (bool == 1)	
-		free(data);
-	else
-		ft_free(data, 1);
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 	t_list	*parse;
 
 	parse = NULL;
+	if (ft_checkber(argv[1], ".ber"))
+		return (ft_error(NULL, ERR_BER, 1));
 	data = malloc(sizeof(t_data));
 	if (argc < 2)
 		return (ft_error(data, ERR_NO_MAP, 1));

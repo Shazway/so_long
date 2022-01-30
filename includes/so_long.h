@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:04:49 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 14:56:29 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/01/30 17:34:48 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@
 # define ERR_NO_MAP "No map given"
 # define ERR_MULTI_MAP "Multiple maps given"
 # define ERR_MALLOC "Malloc failed"
-//#define UP 119	//QWERTY
-//#define RT 97		//QWERTY
+# define ERR_BER "Not a .ber file"
+# define UP 119	//QWERTY
+# define RT 97		//QWERTY
 # define DW 115
 # define LT 100
-# define UP 122	//AZERTY
-# define RT 113	//AZERTY
+//# define UP 122	//AZERTY
+//# define RT 113	//AZERTY
 # define ESC 65307
 
 typedef struct s_point
@@ -115,6 +116,7 @@ int		border_lines(char *border_line);
 int		ft_error(t_data *data, char *error, int bool);
 //---------Allocation-------//
 int		ft_free(t_data *data, int bool);
+void	destroy_text(t_data *data);
 int		ft_allocate(t_data *data);
 //---------Data init--------//
 void	init_textures_data(t_data *data);
@@ -122,9 +124,11 @@ void	assign_text(t_data *data, int nb, char *path);
 void	init_data(t_data *data);
 void	init_mlx_data(t_data *data, int trash);
 t_point	point(int x, int y);
-//---------Checks-----------//
+//---------Checks/Errors----//
 void	check_coin(t_data *data);
 void	check_screen(t_data *data);
+int		ft_error(t_data *data, char *error, int bool);
+int		ft_checkber(char *av, char *ber);
 void	check_exit(t_data *d);
 //---------Drawing----------//
 void	draw_pixel(t_data *d, int x, int y, t_color color);
