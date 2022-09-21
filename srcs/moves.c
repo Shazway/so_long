@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 05:10:04 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 05:23:55 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/09/22 00:59:17 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,20 @@ int	hook_keypress(int keycode, t_data *data)
 
 void	move_player(int key, t_data *d)
 {
-	if (key == UP && d->map[(int)d->player.y - 1][(int)d->player.x] != '1')
+	if ((key == W || key == Z) && d->map[(int)d->player.y - 1][(int)d->player.x] != '1')
 		d->player.y--;
-	else if (key == DW && d->map[(int)d->player.y + 1][(int)d->player.x] != '1')
+	else if (key == S && d->map[(int)d->player.y + 1][(int)d->player.x] != '1')
 		d->player.y++;
-	else if (key == LT && d->map[(int)d->player.y][(int)d->player.x + 1] != '1')
+	else if (key == D && d->map[(int)d->player.y][(int)d->player.x + 1] != '1')
+	{
 		d->player.x++;
-	else if (key == RT && d->map[(int)d->player.y][(int)d->player.x - 1] != '1')
+		d->direction = 1;
+	}
+	else if ((key == A || key == Q) && d->map[(int)d->player.y][(int)d->player.x - 1] != '1')
+	{
 		d->player.x--;
+		d->direction = 2;
+	}
 	else
 		return ;
 	d->moves++;

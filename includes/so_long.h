@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:04:49 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 17:34:48 by tmoragli         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:01:02 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@
 # define ERR_NO_MAP "No map given"
 # define ERR_MULTI_MAP "Multiple maps given"
 # define ERR_MALLOC "Malloc failed"
-# define ERR_BER "Not a .ber file"
-# define UP 119	//QWERTY
-# define RT 97		//QWERTY
-# define DW 115
-# define LT 100
-//# define UP 122	//AZERTY
-//# define RT 113	//AZERTY
+# define ERR_BER "Not a .ber file, usage: ./so_long <path to .ber file try one in ./maps>"
+# define W 119	//QWERTY
+# define A 97		//QWERTY
+# define S 115
+# define D 100
+# define Z 122	//AZERTY
+# define Q 113	//AZERTY
 # define ESC 65307
 
 typedef struct s_point
@@ -98,6 +98,7 @@ typedef struct s_data
 	int			moves;
 	int			s;
 	int			start;
+	int		direction;
 	t_point		screen;
 	t_point		map_size;
 	t_point		player;
@@ -137,6 +138,7 @@ void	draw_texture(t_data *data, t_point pos, t_img text, int size);
 void	draw_player(t_data *data);
 void	image(t_data *data);
 void	map_fill(t_data *data);
+void	draw_invert_texture(t_data *data, t_point pos, t_img text, int size);
 //---------Moves------------//
 void	move_player(int key, t_data *d);
 void	show_moves(t_data *data);

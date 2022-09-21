@@ -60,6 +60,7 @@ void	init_data(t_data *data)
 	data->moves = 0;
 	data->s = SIZE;
 	data->start = -1;
+	data->direction = 0;
 }
 
 void	init_textures_data(t_data *data)

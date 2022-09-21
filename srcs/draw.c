@@ -14,15 +14,27 @@
 
 void	draw_player(t_data *data)
 {
-	if (data->start < 0)
+	if (data->start < 0 || (data->coins == 0 &&  (data->player.x == data->exit.x && data->player.y == data->exit.y)))
 		draw_texture(data, point(data->player.x, data->player.y),
 			data->text[PLAYER], data->s);
 	else if (data->start % 2 == 0)
-		draw_texture(data, point(data->player.x, data->player.y),
-			data->text[PLAYER_MOVE], data->s);
+	{
+		if (data->direction == 1)	
+			draw_texture(data, point(data->player.x, data->player.y),
+				data->text[PLAYER_MOVE], data->s);
+		else
+			draw_invert_texture(data, point(data->player.x, data->player.y),
+					data->text[PLAYER_MOVE], data->s);
+	}
 	else
-		draw_texture(data, point(data->player.x, data->player.y),
-			data->text[PLAYER_MOVE2], data->s);
+	{
+		if (data->direction == 1)
+			draw_texture(data, point(data->player.x, data->player.y),
+				data->text[PLAYER_MOVE2], data->s);
+		else
+			draw_invert_texture(data, point(data->player.x, data->player.y),
+					data->text[PLAYER_MOVE2], data->s);
+	}
 }
 
 void	draw_pixel(t_data *d, int x, int y, t_color color)
@@ -47,6 +59,30 @@ t_color	get_pixel_color(t_img text, int x, int y)
 	if ((x >= 0 && x < text.width) && (y >= 0 && y < text.height))
 		return (text.draw[y * text.width + x]);
 	return (convert_color(0, 0, 0, 0));
+}
+
+void	draw_invert_texture(t_data *data, t_point pos, t_img text, int size)
+{
+	double	x;
+	double	y;
+	t_point	ratio;
+
+	pos.x = pos.x * data->s + (data->s - size) / 2;
+	pos.y = pos.y * data->s + (data->s - size) / 2;
+	y = 0;
+	while (y < size)
+	{
+		ratio.y = (double)(y / size) * text.height;
+		x = 0;
+		while (x < size)
+		{
+			ratio.x = (double)(x / size) * text.width;
+			draw_pixel(data, x + pos.x, y + pos.y,
+					get_pixel_color(text, (text.width - 1) - (int)ratio.x, (int)ratio.y));
+			x++;
+		}
+		y++;
+	}
 }
 
 void	draw_texture(t_data *data, t_point pos, t_img text, int size)
