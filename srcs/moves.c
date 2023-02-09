@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 05:10:04 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/09/22 00:59:17 by tmoragli         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:44:20 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	hook_keypress(int keycode, t_data *data)
 
 void	move_player(int key, t_data *d)
 {
+	d->old_player = point(d->player.x, d->player.y);
 	if ((key == W || key == Z) && d->map[(int)d->player.y - 1][(int)d->player.x] != '1')
 		d->player.y--;
 	else if (key == S && d->map[(int)d->player.y + 1][(int)d->player.x] != '1')

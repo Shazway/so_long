@@ -6,16 +6,39 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:08:18 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 17:33:00 by tmoragli         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:07:00 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+int	comp_pos(t_point lhs, t_point rhs)
+{
+	if (lhs.x == rhs.x && lhs.y == rhs.y)
+		return (1);
+	return (0);
+}
+
 void	image(t_data *data)
 {
 	check_coin(data);
-	map_fill(data);
+	if (!data->first_img) // first image, so we draw the full layout
+		map_fill(data);
+	else if (data->first_img == 1) //Then we only, erase the player, and draw it on the new pos
+	{
+		draw_texture(data, data->old_player, data->text[0], data->s);
+		if (comp_pos(data->player, data->exit))
+		{
+			if (data->coins)
+				draw_texture(data, data->player, data->text[CDOOR], data->s);
+			else
+				draw_texture(data, data->player, data->text[ODOOR], data->s);
+		}
+		else if (!data->coins)
+			draw_texture(data, data->exit, data->text[ODOOR], data->s);
+		draw_player(data);
+	}
+	data->first_img = 1;
 	data->start++;
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	show_moves(data);

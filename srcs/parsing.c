@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 16:20:16 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 17:20:20 by tmoragli         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:36:07 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ int	center_lines(char *line, int y, t_data *data)
 		if (line[i] == 'P' && data->player.x != -1)
 			return (ft_error(data, ERR_PLAYER, 0));
 		if (line[i] == 'P')
+		{
 			data->player = point(i, y);
+			data->old_player = point(i, y);
+		}
 		if (line[i] == 'E')
 			data->exit = point(i, y);
 		i++;

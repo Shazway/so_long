@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:04:49 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/09/22 01:01:02 by tmoragli         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:35:13 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_parsing
 
 typedef struct s_data
 {
+	int			first_img;
 	void		*mlx;
 	void		*win;
 	int			height;
@@ -102,6 +103,7 @@ typedef struct s_data
 	t_point		screen;
 	t_point		map_size;
 	t_point		player;
+	t_point		old_player;
 	t_point		exit;
 	t_color		*draw;
 	t_img		*text;

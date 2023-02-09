@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 04:55:20 by tmoragli          #+#    #+#             */
-/*   Updated: 2022/01/30 05:24:40 by tmoragli         ###   ########.fr       */
+/*   Updated: 2023/02/09 21:33:12 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	init_data(t_data *data)
 	data->s = SIZE;
 	data->start = -1;
 	data->direction = 0;
+	data->first_img = 0;
 }
 
 void	init_textures_data(t_data *data)
