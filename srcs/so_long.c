@@ -6,7 +6,7 @@
 /*   By: tmoragli <tmoragli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 21:08:18 by tmoragli          #+#    #+#             */
-/*   Updated: 2023/02/09 22:07:00 by tmoragli         ###   ########.fr       */
+/*   Updated: 2023/02/17 00:00:03 by tmoragli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	image(t_data *data)
 	else if (data->first_img == 1) //Then we only, erase the player, and draw it on the new pos
 	{
 		draw_texture(data, data->old_player, data->text[0], data->s);
+		if (comp_pos(data->exit, data->old_player))
+		{
+			if (!data->coins)
+				draw_texture(data, data->exit, data->text[ODOOR], data->s);
+			else
+				draw_texture(data, data->exit, data->text[CDOOR], data->s);
+		}
 		if (comp_pos(data->player, data->exit))
 		{
 			if (data->coins)
